@@ -1,7 +1,8 @@
 ARG K3S_TAG="v1.21.2-k3s1"
+ARG NVIDIA_IMAGE="nvidia/cuda:11.2.0-base-ubuntu18.04"
 FROM rancher/k3s:$K3S_TAG as k3s
 
-FROM nvidia/cuda:11.2.0-base-ubuntu18.04
+FROM $NVIDIA_IMAGE
 
 ARG NVIDIA_CONTAINER_RUNTIME_VERSION
 ENV NVIDIA_CONTAINER_RUNTIME_VERSION=$NVIDIA_CONTAINER_RUNTIME_VERSION
@@ -19,7 +20,7 @@ RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/ubuntu18.04/nvi
 RUN apt-get update && \
     apt-get -y install nvidia-container-runtime=${NVIDIA_CONTAINER_RUNTIME_VERSION}
 
-COPY --from=k3s / /
+COPY --from=k3s --chmod=0755 /bin/k3s /bin/k3s
 
 RUN mkdir -p /etc && \
     echo 'hosts: files dns' > /etc/nsswitch.conf
