@@ -1,9 +1,5 @@
 version = 2
 
-# ---- added for GPU support
-[plugins.linux]
-  runtime = "nvidia-container-runtime"
-
 [plugins."io.containerd.internal.v1.opt"]
   path = "{{ .NodeConfig.Containerd.Opt }}"
 [plugins."io.containerd.grpc.v1.cri"]
