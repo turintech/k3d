@@ -2,15 +2,15 @@
 ARG K3S_TAG="v1.27.4-k3s1"
 ARG NVIDIA_IMAGE="nvidia/cuda:11.8.0-base-ubuntu22.04"
 FROM rancher/k3s:$K3S_TAG as k3s
-
-FROM $NVIDIA_IMAGE
+# nvidia/cuda:11.8.0-base-ubuntu22.04
+FROM nvidia/cuda:11.2.2-base-ubuntu20.04
 
 ARG NVIDIA_CONTAINER_RUNTIME_VERSION
 ENV NVIDIA_CONTAINER_RUNTIME_VERSION=$NVIDIA_CONTAINER_RUNTIME_VERSION
 
-# # Install NVIDIA Container Runtime nvidia/cuda:11.2.2-base-ubuntu20.04
-# RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | apt-key add -
-# RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/ubuntu20.04/nvidia-container-runtime.list | tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+# Install NVIDIA Container Runtime 
+RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | apt-key add -
+RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/ubuntu20.04/nvidia-container-runtime.list | tee /etc/apt/sources.list.d/nvidia-container-runtime.list
 
 RUN apt-get update && \
     apt-get -y install gnupg2 curl nvidia-container-runtime=${NVIDIA_CONTAINER_RUNTIME_VERSION} && \

@@ -40,5 +40,4 @@ jobs:
           build-args: |
             K3S_TAG=${{env.K3S_TAG}}
             NVIDIA_CONTAINER_RUNTIME_VERSION=${{env.NVIDIA_CONTAINER_RUNTIME_VERSION}}
-            NVIDIA_IMAGE=${{env.NVIDIA_IMAGE}}
           platforms: linux/amd64,linux/arm64
