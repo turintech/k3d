@@ -11,7 +11,7 @@ ENV NVIDIA_CONTAINER_RUNTIME_VERSION=$NVIDIA_CONTAINER_RUNTIME_VERSION
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update && \
-    apt-get -y install gnupg2 curl ca-certificates
+    apt-get -y install gnupg2 curl ca-certificates rpcbind nfs-common nfs-kernel-server
 
 # Install NVIDIA Container Runtime
 RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | apt-key add -
@@ -40,7 +40,7 @@ COPY config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
 # Deploy the nvidia driver plugin on startup
 RUN mkdir -p /var/lib/rancher/k3s/server/manifests
 
-COPY device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
+# COPY device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
 
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
