@@ -40,7 +40,7 @@ COPY config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
 # Deploy the nvidia driver plugin on startup
 RUN mkdir -p /var/lib/rancher/k3s/server/manifests
 
-# COPY device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
+COPY device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
 
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
