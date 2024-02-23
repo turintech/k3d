@@ -11,7 +11,9 @@ ENV NVIDIA_CONTAINER_RUNTIME_VERSION=$NVIDIA_CONTAINER_RUNTIME_VERSION
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update && \
-    apt-get -y install gnupg2 curl ca-certificates rpcbind nfs-common nfs-kernel-server
+    apt-get -y install gnupg2 curl ca-certificates rpcbind nfs-common nfs-kernel-server curl
+
+RUN RUN curl https://releases.rancher.com/install-docker/24.0.7.sh | sh
 
 # Install NVIDIA Container Runtime
 RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | apt-key add -
