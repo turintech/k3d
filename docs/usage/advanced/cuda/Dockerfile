@@ -13,7 +13,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get update && \
     apt-get -y install gnupg2 curl ca-certificates rpcbind nfs-common nfs-kernel-server curl
 
-RUN curl https://releases.rancher.com/install-docker/24.0.7.sh | sh
+# RUN curl https://releases.rancher.com/install-docker/24.0.7.sh | sh
 
 # Install NVIDIA Container Runtime
 RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | apt-key add -
